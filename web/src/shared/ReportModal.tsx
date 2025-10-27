@@ -1,43 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 export default function ReportModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [category, setCategory] = useState("unsafe");
-  const [desc, setDesc] = useState("");
-  const [location, setLocation] = useState("");
+  useEffect(() => {
+    function onKey(e: KeyboardEvent){ if(e.key === 'Escape') onClose(); }
+    if(open) window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, onClose]);
 
-  if (!open) return null;
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // For now: client-only demo. Later: send to Firestore.
-    console.log("REPORT", { category, desc, location });
-    alert("Report saved to demo console. Integrate backend later.");
-    onClose();
-  };
+  if(!open) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <form onSubmit={submit} className="relative bg-white rounded-t-lg md:rounded-lg w-full md:w-3/5 max-w-2xl p-6 z-10">
+      <form onSubmit={(e)=>{ e.preventDefault(); alert('Demo: reported (client only)'); onClose(); }} className="relative bg-white rounded-t-xl md:rounded-xl w-full md:w-3/5 max-w-2xl p-6 z-10">
         <h3 className="text-xl font-semibold mb-3">Report Incident</h3>
-
-        <label className="block mb-2 text-sm">Category</label>
-        <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full p-2 border rounded mb-3">
-          <option value="unsafe">Unsafe area</option>
-          <option value="harassment">Harassment</option>
-          <option value="streetlight">Streetlight issue</option>
-          <option value="other">Other</option>
+        <label className="block text-sm mb-1">Category</label>
+        <select className="w-full p-2 border rounded mb-3">
+          <option>Unsafe area</option>
+          <option>Harassment</option>
+          <option>Streetlight</option>
+          <option>Other</option>
         </select>
 
-        <label className="block mb-2 text-sm">Location (address or landmark)</label>
-        <input value={location} onChange={(e) => setLocation(e.target.value)} className="w-full p-2 border rounded mb-3" placeholder="e.g., Oak Street near 4th" />
+        <label className="block text-sm mb-1">Location</label>
+        <input className="w-full p-2 border rounded mb-3" placeholder="Address or landmark" />
 
-        <label className="block mb-2 text-sm">Description</label>
-        <textarea value={desc} onChange={(e) => setDesc(e.target.value)} className="w-full p-2 border rounded mb-3" rows={4} placeholder="Describe what happened..." />
+        <label className="block text-sm mb-1">Description</label>
+        <textarea className="w-full p-2 border rounded mb-3" rows={4} placeholder="What happened?" />
 
         <div className="flex justify-end gap-3">
           <button type="button" onClick={onClose} className="px-4 py-2 rounded border">Cancel</button>
-          <button type="submit" className="px-4 py-2 rounded bg-purple-600 text-white">Submit</button>
+          <button type="submit" className="px-4 py-2 rounded bg-primary text-white">Submit</button>
         </div>
       </form>
     </div>
