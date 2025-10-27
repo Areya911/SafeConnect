@@ -6,10 +6,13 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signInWithPhoneNumber,
-  RecaptchaVerifier,
-  User,
+  // Note: we DO NOT import User or RecaptchaVerifier as runtime imports
 } from "firebase/auth";
 import { auth } from "../firebase";
+
+// TYPE-ONLY imports (erased at compile time)
+import type { User } from "firebase/auth";
+import type { RecaptchaVerifier } from "firebase/auth";
 
 type AuthContextType = {
   user: User | null;
