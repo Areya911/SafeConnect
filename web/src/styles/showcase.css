@@ -1,0 +1,13 @@
+/* web/src/styles/showcase.css */
+.safeconnect-showcase .map-pin {
+  transform: rotate(-45deg);
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.sos-button {
+  transition: transform .15s ease;
+}
