@@ -1,9 +1,8 @@
-// web/tailwind.config.cjs
-/** @type {import('tailwindcss').Config} */
+﻿/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-  "./index.html",
-  "./src/**/*.{js,ts,jsx,tsx,html}"
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx,html}"
   ],
   theme: {
     extend: {
@@ -18,7 +17,7 @@ module.exports = {
       borderRadius: { xl: '1rem' },
       boxShadow: { soft: '0 10px 30px rgba(2,6,23,0.06)' },
       spacing: { '128': '32rem' }
-    },
+    }
   },
-  plugins: [],
-}
+  plugins: []
+};
