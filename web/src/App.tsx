@@ -741,7 +741,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-900 font-sans antialiased text-white">
       {/* Tailwind CDN fallback: remove if using compiled CSS */}
-      <script src="https://cdn.tailwindcss.com"></script>
+  
 
       {/* Inter font */}
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap'); body { font-family: 'Inter', sans-serif; }`}</style>
